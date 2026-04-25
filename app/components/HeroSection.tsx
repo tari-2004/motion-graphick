@@ -42,7 +42,7 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
@@ -73,7 +73,7 @@ export default function HeroSection() {
           <div className="rounded-[1.75rem] bg-ink/70 p-4 text-[11px] uppercase tracking-[0.35em] text-soft-blue border border-white/10">
             <span className="font-bold text-titanium">Studio pulse:</span> premium, clean, and cinematic.
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   )
