@@ -11,7 +11,7 @@ export default function Loader({ children }: { children: React.ReactNode }) {
     // Simulate loading time - adjust as needed
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 3000) // 3 seconds loading
+    }, 1500) // 1.5 seconds loading - optimized for performance
 
     return () => clearTimeout(timer)
   }, [])

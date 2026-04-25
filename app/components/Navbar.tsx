@@ -61,16 +61,15 @@ export default function Navbar() {
               whileHover={{ scale: 1.3, rotate: 180 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              {/* Pulse effect */}
+              {/* Pulse effect on hover only */}
               <motion.div
                 className="absolute inset-0 rounded-full bg-brand-red"
-                animate={{
+                whileHover={{
                   scale: [1, 1.5, 1],
                   opacity: [0.5, 0, 0.5]
                 }}
                 transition={{
                   duration: 2,
-                  repeat: Infinity,
                   ease: "easeInOut"
                 }}
               />

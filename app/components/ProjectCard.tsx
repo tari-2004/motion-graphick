@@ -44,7 +44,8 @@ export default function ProjectCard({ project, index }: { project: Project; inde
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
+          loading="lazy"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-[0.23,1,0.32,1] group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-black/10 to-transparent opacity-55" />

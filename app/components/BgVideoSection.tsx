@@ -32,7 +32,8 @@ export default function BgVideoSection() {
         loop 
         muted 
         playsInline 
-        className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out cursor-none"
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-500 ease-in-out cursor-none"
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>

@@ -13,13 +13,24 @@ export default function Cursor() {
   const springY = useSpring(mouseY, { stiffness: 500, damping: 28 })
 
   useEffect(() => {
+    let throttleTimer: NodeJS.Timeout | null = null
+    
     const moveMouse = (e: MouseEvent) => {
+      if (throttleTimer) return
+      
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
+      
+      throttleTimer = setTimeout(() => {
+        throttleTimer = null
+      }, 50) // Throttle to ~20fps instead of 60fps for better performance
     };
 
     window.addEventListener('mousemove', moveMouse)
-    return () => window.removeEventListener('mousemove', moveMouse)
+    return () => {
+      window.removeEventListener('mousemove', moveMouse)
+      if (throttleTimer) clearTimeout(throttleTimer)
+    }
   }, [])
 
   return (
