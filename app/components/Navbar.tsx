@@ -26,35 +26,104 @@ export default function Navbar() {
 
   return (
     <>
-      <nav 
+      <nav
         style={{ zIndex: 100 }}
         className={`fixed top-0 left-0 right-0 transition-all duration-500 border-b ${
-          scrolled 
-            ? 'bg-ink/80 backdrop-blur-xl py-4 border-brand-blue/10' 
-            : 'bg-transparent py-8 border-transparent'
+          scrolled
+            ? 'bg-ink/90 backdrop-blur-xl py-3 border-brand-blue/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]'
+            : 'bg-transparent py-6 border-transparent'
         }`}
       >
         <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-12">
-          {/* Logo Section */}
-          <button 
-            onClick={() => scrollTo('top', setMenuOpen)} 
-            className="group flex items-center gap-2 text-xl font-black uppercase text-titanium tracking-tighter"
+          {/* Enhanced Logo Section */}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => scrollTo('top', () => setMenuOpen(false))}
+            className="group flex items-center gap-3 text-2xl font-black uppercase text-titanium tracking-tighter relative"
           >
-            MOTION
-            <span className="w-2 h-2 rounded-full bg-brand-red group-hover:scale-150 transition-transform duration-300" />
-          </button>
+            <motion.span
+              className="relative"
+              whileHover={{ x: -2 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              MOTION
+              {/* Animated underline */}
+              <motion.div
+                className="absolute -bottom-1 left-0 h-[2px] bg-brand-red"
+                initial={{ width: 0 }}
+                whileHover={{ width: "100%" }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.span>
+            <motion.span
+              className="w-3 h-3 rounded-full bg-brand-red relative"
+              whileHover={{ scale: 1.3, rotate: 180 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              {/* Pulse effect */}
+              <motion.div
+                className="absolute inset-0 rounded-full bg-brand-red"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.5, 0, 0.5]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </motion.span>
+          </motion.button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-10">
-            {navItems.map((item) => (
-              <button 
-                key={item.target} 
-                onClick={() => scrollTo(item.target, setMenuOpen)} 
-                className="text-[10px] font-bold uppercase tracking-[0.3em] text-titanium/40 hover:text-brand-red transition-colors duration-300"
-              >
-                {item.label}
-              </button>
-            ))}
+          {/* Premium Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-12">
+            <div className="flex items-center gap-8">
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item.target}
+                  onClick={() => scrollTo(item.target, () => setMenuOpen(false))}
+                  className="group relative px-4 py-2 text-sm font-bold uppercase tracking-[0.15em] text-titanium/60 hover:text-titanium transition-all duration-300"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ y: 0 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  {item.label}
+                  {/* Animated background */}
+                  <motion.div
+                    className="absolute inset-0 bg-brand-red/10 rounded-lg -z-10"
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileHover={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                  />
+                  {/* Bottom border animation */}
+                  <motion.div
+                    className="absolute bottom-0 left-0 h-[2px] bg-brand-red"
+                    initial={{ width: 0 }}
+                    whileHover={{ width: "100%" }}
+                    transition={{ duration: 0.3, delay: 0.1 }}
+                  />
+                </motion.button>
+              ))}
+            </div>
+
+            {/* Desktop CTA Button */}
+            <motion.a
+              href="mailto:hello@rawmotion.studio"
+              className="group relative px-6 py-3 bg-brand-red/10 border border-brand-red/30 rounded-full text-sm font-semibold uppercase tracking-[0.1em] text-brand-red hover:bg-brand-red hover:text-titanium transition-all duration-300 overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="relative z-10">Get in touch</span>
+              {/* Animated background fill */}
+              <motion.div
+                className="absolute inset-0 bg-brand-red"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.a>
           </div>
 
           {/* Mobile Toggle Button (High Z-Index) */}
@@ -135,7 +204,7 @@ export default function Navbar() {
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.4 + i * 0.1, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-                    onClick={() => scrollTo(item.target, setMenuOpen)}
+                    onClick={() => scrollTo(item.target, () => setMenuOpen(false))}
                     className="group relative text-4xl md:text-6xl font-black uppercase tracking-tighter text-titanium hover:text-brand-red transition-colors duration-300"
                   >
                     {item.label}

@@ -1,5 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
+import { scrollTo } from '../utils/nav-logic'
 
 export default function HeroSection() {
   return (
@@ -26,18 +27,18 @@ export default function HeroSection() {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
-            <a
-              href="#work"
+            <button
+              onClick={() => scrollTo('work')}
               className="inline-flex items-center justify-center rounded-full border border-brand-red bg-brand-red/10 px-8 py-4 text-sm font-semibold uppercase tracking-[0.25em] text-brand-red transition hover:bg-brand-red/15"
             >
               View work
-            </a>
-            <a
-              href="#services"
+            </button>
+            <button
+              onClick={() => scrollTo('services')}
               className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold uppercase tracking-[0.25em] text-titanium transition hover:border-brand-blue/20"
             >
               Services
-            </a>
+            </button>
           </div>
         </motion.div>
 
