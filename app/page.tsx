@@ -11,17 +11,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen bg-ink select-none overflow-x-hidden">
+    <main className="relative w-full min-h-screen bg-surface select-none overflow-x-hidden">
       {/* 01. GLOBAL INTERFACE ELEMENTS */}
       <Cursor />
       <Navbar />
 
       {/* 02. THE HERO COMPOSITE (100vh) */}
-      {/* We stack the Video (30%) and the Text (70%) into a single viewport */}
-      {/* <div className="flex flex-col h-screen w-full"> */}
-        <BgVideoSection />
+      {/* The video section is fixed in place while the hero content begins below it. */}
+      <BgVideoSection />
+      <div className="relative z-10 pt-[70vh]">
         <HeroSection />
-      {/* </div> */}
+      </div>
 
       {/* 03. THE SCROLLABLE STACK */}
       {/* These components are modular and appear as the user scrolls */}

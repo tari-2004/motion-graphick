@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
 
 export default function BgVideoSection() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -24,7 +23,7 @@ export default function BgVideoSection() {
   }, [])
 
   return (
-    <section className="relative h-[70vh] w-full overflow-hidden bg-ink">
+    <section className="fixed inset-x-0 top-0 z-0 h-[70vh] w-full overflow-hidden bg-surface">
       {/* 01. THE VIDEO LAYER */}
       <video 
         ref={videoRef}
@@ -33,14 +32,15 @@ export default function BgVideoSection() {
         muted 
         playsInline 
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-500 ease-in-out cursor-none"
+        className="absolute inset-0 w-full h-full object-cover brightness-70 contrast-100 transition-all duration-[1000ms] ease-[0.23,1,0.32,1]"
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
 
       {/* 02. THE TEXTURE OVERLAYS */}
-      <div className="absolute inset-0 bg-scanlines pointer-events-none opacity-20" />
-      <div className="absolute inset-0 bg-noise pointer-events-none opacity-[0.04]" />
+      {/* <div className="absolute inset-0 bg-white/80 pointer-events-none" /> */}
+      <div className="absolute inset-0 bg-scanlines pointer-events-none opacity-10" />
+      <div className="absolute inset-0 bg-noise pointer-events-none opacity-[0.06]" />
 
       {/* 03. INTERACTIVE UI ELEMENTS */}
       <div className="absolute bottom-10 left-10 z-10 flex items-center gap-4">
@@ -50,7 +50,7 @@ export default function BgVideoSection() {
           </span>
           <div className="h-[1px] w-full bg-brand-blue/30" />
         </div>
-        <p className="text-[8px] uppercase tracking-widest text-titanium/30">
+        <p className="text-[8px] uppercase tracking-widest text-text/40">
           Source: Local_Drive_01
         </p>
       </div>

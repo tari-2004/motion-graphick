@@ -18,7 +18,7 @@ export default function Loader({ children }: { children: React.ReactNode }) {
 
   // Prevent hydration mismatch
   if (!mounted) {
-    return <div className="min-h-screen bg-ink" />
+    return <div className="min-h-screen bg-surface" />
   }
 
   return (
@@ -28,11 +28,11 @@ export default function Loader({ children }: { children: React.ReactNode }) {
           key="loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink"
+          transition={{ duration: 1.8, ease: [0.23, 1, 0.32, 1] }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-surface"
         >
           {/* Background Effects */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,17,76,0.15),transparent_50%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(217,88,59,0.15),transparent_50%)] pointer-events-none" />
           <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
 
           {/* Loader Content */}
@@ -44,7 +44,7 @@ export default function Loader({ children }: { children: React.ReactNode }) {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
               className="mb-8"
             >
-              <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-titanium">
+              <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-text">
                 MOTION
               </h1>
               <motion.div
@@ -60,7 +60,7 @@ export default function Loader({ children }: { children: React.ReactNode }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-sm uppercase tracking-[0.5em] text-soft-blue"
+              className="text-sm uppercase tracking-[0.5em] text-muted"
             >
               Loading Experience
             </motion.p>

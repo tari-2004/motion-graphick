@@ -26,7 +26,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
     }
 
     startVideo()
-  }, [project.video])
+  }, [project.video, project.title])
 
   return (
     <motion.div
@@ -34,9 +34,28 @@ export default function ProjectCard({ project, index }: { project: Project; inde
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.08, duration: 0.85, ease: [0.23, 1, 0.32, 1] }}
-      className="group relative aspect-[3/4] rounded-[2rem] overflow-hidden border border-brand-blue/10 bg-ink shadow-[0_40px_120px_rgba(0,0,0,0.2)]"
+      className="group flex flex-col overflow-hidden rounded-[2rem] border border-brand-blue/10 bg-white/95 shadow-[0_40px_120px_rgba(0,0,0,0.08)] transition-transform duration-500 hover:-translate-y-1"
     >
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      <div className="flex flex-col gap-5 p-6">
+        <div className="flex items-center justify-between gap-4 rounded-full border border-brand-blue/10 bg-surface-soft px-4 py-2 text-[10px] uppercase tracking-[0.35em] text-muted">
+          {/* <span className="font-semibold text-brand-red">{project.cat}</span> */}
+          {/* <span className="inline-flex items-center gap-2 text-brand-blue">
+            <span className="block h-2 w-2 rounded-full bg-brand-red animate-pulse" />
+            LIVE
+          </span> */}
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-4xl md:text-5xl font-black text-text uppercase tracking-[-0.05em] leading-[0.95]">
+            {project.title}
+          </h3>
+          <p className="text-support text-muted">
+            {project.id}{' // '}{project.cat}
+          </p>
+        </div>
+      </div>
+
+      <div className="overflow-hidden border-t border-brand-blue/10 bg-surface-soft">
         <video
           ref={videoRef}
           src={project.video}
@@ -45,28 +64,8 @@ export default function ProjectCard({ project, index }: { project: Project; inde
           loop
           playsInline
           preload="none"
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-[0.23,1,0.32,1] group-hover:scale-105"
+          className="h-[260px] w-full object-cover transition-transform duration-[1200ms] ease-[0.23,1,0.32,1] group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-black/10 to-transparent opacity-55" />
-      </div>
-
-      <div className="relative z-10 flex h-full flex-col justify-between p-6">
-        <div className="flex items-center justify-between gap-4 rounded-full border border-white/10 bg-black/20 px-4 py-2 backdrop-blur-xl text-[10px] uppercase tracking-[0.35em] text-soft-blue">
-          <span className="font-semibold text-brand-red">{project.cat}</span>
-          <span className="inline-flex items-center gap-2 text-brand-blue">
-            <span className="block h-2 w-2 rounded-full bg-brand-red animate-pulse" />
-            LIVE
-          </span>
-        </div>
-
-        <div className="rounded-[1.75rem] bg-black/30 p-5 backdrop-blur-xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.3)] transition-transform duration-500 group-hover:-translate-y-1">
-          <h3 className="text-3xl md:text-4xl font-black text-titanium uppercase tracking-tighter leading-[1.05]">
-            {project.title}
-          </h3>
-          <p className="mt-3 text-[10px] uppercase tracking-[0.35em] text-soft-blue">
-            {project.id} // {project.cat}
-          </p>
-        </div>
       </div>
     </motion.div>
   )

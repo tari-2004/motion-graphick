@@ -30,7 +30,7 @@ export default function Navbar() {
         style={{ zIndex: 100 }}
         className={`fixed top-0 left-0 right-0 transition-all duration-500 border-b ${
           scrolled
-            ? 'bg-ink/90 backdrop-blur-xl py-3 border-brand-blue/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]'
+            ? 'bg-surface/95 backdrop-blur-xl py-3 border-brand-blue/10 shadow-[0_8px_32px_rgba(0,0,0,0.08)]'
             : 'bg-transparent py-6 border-transparent'
         }`}
       >
@@ -40,7 +40,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => scrollTo('top', () => setMenuOpen(false))}
-            className="group flex items-center gap-3 text-2xl font-black uppercase text-titanium tracking-tighter relative"
+            className="group flex items-center gap-3 text-2xl font-black uppercase text-text tracking-tighter relative"
           >
             <motion.span
               className="relative"
@@ -83,7 +83,7 @@ export default function Navbar() {
                 <motion.button
                   key={item.target}
                   onClick={() => scrollTo(item.target, () => setMenuOpen(false))}
-                  className="group relative px-4 py-2 text-sm font-bold uppercase tracking-[0.15em] text-titanium/60 hover:text-titanium transition-all duration-300"
+                  className="group relative px-4 py-2 text-sm font-bold uppercase tracking-[0.15em] text-text/70 hover:text-text transition-all duration-300"
                   whileHover={{ y: -2 }}
                   whileTap={{ y: 0 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -110,7 +110,7 @@ export default function Navbar() {
             {/* Desktop CTA Button */}
             <motion.a
               href="mailto:hello@rawmotion.studio"
-              className="group relative px-6 py-3 bg-brand-red/10 border border-brand-red/30 rounded-full text-sm font-semibold uppercase tracking-[0.1em] text-brand-red hover:bg-brand-red hover:text-titanium transition-all duration-300 overflow-hidden"
+              className="group relative px-6 py-3 bg-brand-red/10 border border-brand-red/30 rounded-full text-sm font-semibold uppercase tracking-[0.1em] text-brand-red hover:bg-brand-red hover:text-text transition-all duration-300 overflow-hidden"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -134,15 +134,15 @@ export default function Navbar() {
             <div className="w-6 h-4 flex flex-col justify-between">
               <motion.span 
                 animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }} 
-                className="block h-[2px] w-full bg-titanium rounded-full origin-center" 
+                className="block h-[2px] w-full bg-text rounded-full origin-center" 
               />
               <motion.span 
                 animate={{ opacity: menuOpen ? 0 : 1 }} 
-                className="block h-[2px] w-full bg-titanium rounded-full" 
+                className="block h-[2px] w-full bg-text rounded-full" 
               />
               <motion.span 
                 animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7 : 0 }} 
-                className="block h-[2px] w-full bg-titanium rounded-full origin-center" 
+                className="block h-[2px] w-full bg-text rounded-full origin-center" 
               />
             </div>
           </button>
@@ -158,7 +158,7 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
             style={{ zIndex: 105 }}
-            className="fixed inset-0 bg-ink flex flex-col md:hidden overflow-hidden"
+            className="fixed inset-0 bg-surface flex flex-col md:hidden overflow-hidden"
           >
             {/* Premium Background Effects */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,17,76,0.15),transparent_40%),radial-gradient(circle_at_bottom_right,_rgba(21,123,255,0.1),transparent_40%)] pointer-events-none" />
@@ -171,7 +171,7 @@ export default function Navbar() {
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ delay: 0.2, duration: 0.3 }}
               onClick={() => setMenuOpen(false)}
-              className="absolute top-8 right-8 z-20 w-14 h-14 rounded-full border border-white/10 bg-black/30 backdrop-blur-xl flex items-center justify-center text-titanium hover:text-brand-red hover:border-brand-red/30 transition-all duration-300 hover:scale-110 shadow-[0_20px_60px_rgba(0,0,0,0.3)]"
+              className="absolute top-8 right-8 z-20 w-14 h-14 rounded-full border border-brand-blue/10 bg-white/90 backdrop-blur-xl flex items-center justify-center text-text hover:text-brand-red hover:border-brand-red/30 transition-all duration-300 hover:scale-110 shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
               aria-label="Close menu"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -191,7 +191,7 @@ export default function Navbar() {
                 <p className="text-[10px] uppercase tracking-[0.5em] text-brand-red mb-4">
                   // NAVIGATION
                 </p>
-                <h2 className="text-2xl font-black uppercase tracking-tight text-titanium">
+                <h2 className="text-2xl font-black uppercase tracking-tight text-text">
                   Explore the studio
                 </h2>
               </motion.div>
@@ -204,7 +204,7 @@ export default function Navbar() {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.4 + i * 0.1, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
                     onClick={() => scrollTo(item.target, () => setMenuOpen(false))}
-                    className="group relative text-4xl md:text-6xl font-black uppercase tracking-tighter text-titanium hover:text-brand-red transition-colors duration-300"
+                    className="group relative text-4xl md:text-6xl font-black uppercase tracking-tighter text-text hover:text-brand-red transition-colors duration-300"
                   >
                     {item.label}
                     <div className="absolute -bottom-2 left-0 w-0 h-[3px] bg-brand-red group-hover:w-full transition-all duration-500" />
@@ -219,7 +219,7 @@ export default function Navbar() {
                 transition={{ delay: 0.8, duration: 0.6 }}
                 className="mt-16 text-center"
               >
-                <p className="text-soft-blue text-sm uppercase tracking-[0.18em] mb-6">
+                <p className="text-muted text-sm uppercase tracking-[0.18em] mb-6">
                   Ready to collaborate?
                 </p>
                 <a

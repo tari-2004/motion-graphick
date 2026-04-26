@@ -1,4 +1,6 @@
 'use client'
+
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import ProjectCard from './ProjectCard'
 
@@ -13,44 +15,16 @@ const PROJECTS = [
 
 export default function WorkGrid() {
   return (
-    <section id="work" className="bg-ink border-t border-brand-blue/10 px-6 md:px-12 py-20">
+    <section id="work" className="bg-surface border-t border-brand-blue/10 px-6 md:px-12 py-20">
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1.2fr] gap-6 mb-10">
-          <div className="bg-ink rounded-[2rem] p-10 border border-brand-blue/10 shadow-[0_40px_120px_rgba(0,0,0,0.18)]">
+          <div className="bg-surface-soft rounded-[2rem] p-10 border border-brand-blue/10 shadow-[0_40px_120px_rgba(0,0,0,0.08)]">
             <p className="text-brand-red text-[10px] font-black uppercase tracking-[0.4em] mb-4">
               SELECTED REEL
             </p>
-            <h2 className="text-5xl md:text-7xl font-black text-titanium uppercase tracking-tighter leading-none">
-              SELECTED <span className="text-brand-red italic">WORK</span>
+            <h2 className="text-6xl md:text-[8rem] font-black text-text uppercase tracking-[-0.06em] leading-[0.88]">
+              PROJECT <span className="text-brand-red italic">WORKS</span>
             </h2>
-            {/* <p className="mt-6 max-w-2xl text-soft-blue text-sm leading-7 tracking-[0.18em] uppercase">
-              Premium motion work rendered as clean, cinematic previews. The grid is intentionally minimal so the video content stays front and center.
-            </p> */}
-          </div>
-
-          <div className="bg-ink rounded-[2rem] p-8 border border-brand-blue/10 shadow-[0_30px_80px_rgba(0,0,0,0.14)] flex flex-col justify-between gap-6">
-            <div>
-              <p className="text-brand-red text-[10px] font-black uppercase tracking-[0.4em] mb-3">
-                // BROADCAST STATUS
-              </p>
-              <h3 className="text-3xl text-titanium font-black uppercase tracking-tighter mb-4">
-                LIVE STREAMLINE
-              </h3>
-              {/* <p className="text-soft-blue text-sm uppercase tracking-[0.3em] leading-7">
-                06 premium reels loaded. 42 archive assets ready. The presentation is polished, focused, and easy to scan.
-              </p> */}
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-[1.5rem] bg-white/5 p-5 border border-white/10 backdrop-blur-xl">
-                <p className="text-brand-red text-[10px] uppercase tracking-[0.35em] mb-2">VIDEOS</p>
-                <p className="text-3xl font-black text-titanium">06</p>
-              </div>
-              <div className="rounded-[1.5rem] bg-white/5 p-5 border border-white/10 backdrop-blur-xl">
-                <p className="text-brand-red text-[10px] uppercase tracking-[0.35em] mb-2">ARCHIVE</p>
-                <p className="text-3xl font-black text-titanium">42</p>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -58,6 +32,24 @@ export default function WorkGrid() {
           {PROJECTS.map((project, idx) => (
             <ProjectCard key={project.id} project={project} index={idx} />
           ))}
+        </div>
+
+        {/* NEW SEE ALL BUTTON SECTION */}
+        <div className="mt-16 flex justify-center">
+          <Link href="/work">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative flex items-center gap-4 rounded-full bg-text px-12 py-6 text-surface shadow-2xl transition-colors hover:bg-brand-red"
+            >
+              <span className="text-[10px] font-black uppercase tracking-[0.4em]">
+                Explore Full Archive
+              </span>
+              <span className="text-surface/30 group-hover:text-surface font-mono text-[10px]">
+                (42_FILES)
+              </span>
+            </motion.div>
+          </Link>
         </div>
       </div>
     </section>
