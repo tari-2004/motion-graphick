@@ -38,11 +38,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
     >
       <div className="flex flex-col gap-5 p-6">
         <div className="flex items-center justify-between gap-4 rounded-full border border-brand-blue/10 bg-surface-soft px-4 py-2 text-[10px] uppercase tracking-[0.35em] text-muted">
-          {/* <span className="font-semibold text-brand-red">{project.cat}</span> */}
-          {/* <span className="inline-flex items-center gap-2 text-brand-blue">
-            <span className="block h-2 w-2 rounded-full bg-brand-red animate-pulse" />
-            LIVE
-          </span> */}
+          {/* Status markers or category badges go here */}
         </div>
 
         <div className="space-y-3">
