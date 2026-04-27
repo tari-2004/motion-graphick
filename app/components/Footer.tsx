@@ -1,93 +1,138 @@
 'use client'
 import { motion } from 'framer-motion'
-
-// Direct imports to bypass the barrel file error
-import { Camera, Bird, Link } from 'lucide-react'
+import { Camera, Bird, Link as LinkIcon, Mail, ArrowUpRight, } from 'lucide-react'
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
-    <footer className="relative bg-surface border-t border-brand-blue/10 px-6 md:px-12 py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(217,88,59,0.08),transparent_35%)] pointer-events-none" />
-      <div className="absolute inset-0 blueprint-grid opacity-5 pointer-events-none" />
-      
-      <div className="relative z-10 mx-auto max-w-[1400px]">
-        <div className="grid gap-16">
+    <footer className="relative bg-[#080808] pt-32 pb-12 px-6 md:px-12 overflow-hidden text-white">
+      {/* 1. CREATIVE BACKGROUND: Thick blur and subtle noise */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute bottom-[-10%] left-[10%] w-[40%] h-[40%] rounded-full bg-brand-red/20 blur-[120px]" />
+        <div className="absolute top-[20%] right-[-5%] w-[30%] h-[30%] rounded-full bg-brand-blue/10 blur-[100px]" />
+      </div>
+      <div className="absolute inset-0 z-1 pointer-events-none opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+      <div className="relative z-10 max-w-[1400px] mx-auto">
+        
+        {/* 2. BIG CTA SECTION */}
+        <div className="grid lg:grid-cols-2 gap-20 items-end mb-32">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-            className="mx-auto max-w-2xl text-center"
+            transition={{ duration: 0.8 }}
           >
-            <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.5em] text-brand-red">
-              // LET'S CONNECT
+            <p className="text-brand-red font-mono text-[10px] tracking-[0.5em] mb-6 uppercase">
+              // NEXT_STEPS
             </p>
-            <h2 className="mb-8 text-4xl md:text-6xl font-black uppercase tracking-tight text-text leading-[0.95]">
-              Ready to create something <span className="text-brand-red italic">exceptional</span>?
+            <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.85] mb-8">
+              Got a <span className="italic text-brand-red">Vision</span>? <br /> 
+              Let's build it.
             </h2>
-            <p className="mb-10 text-sm md:text-base leading-8 tracking-[0.18em] text-muted/80 text-basic">
-              Let's discuss your next motion project. Whether it's brand cinema, interactive experiences, or premium visual systems—we're here to bring your vision to life.
-            </p>
-            <a
-              href="mailto:hello@rawmotion.studio"
-              className="inline-flex items-center justify-center rounded-full border border-brand-red bg-brand-red/10 px-10 py-5 text-sm font-semibold uppercase tracking-[0.25em] text-brand-red transition hover:bg-brand-red/15"
-            >
-              Start a conversation
-            </a>
+            <div className="flex flex-wrap gap-4">
+              {['Motion', 'Identity', 'Strategy'].map((tag) => (
+                <span key={tag} className="px-4 py-2 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-widest bg-white/5">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </motion.div>
 
-          <div className="grid gap-10 md:grid-cols-[1fr_auto_1fr] items-start text-text">
-            <div className="space-y-4">
-              <p className="text-[10px] uppercase tracking-[0.35em] text-muted/70">
-                studio
-              </p>
-              <p className="text-2xl font-black uppercase tracking-tight">
-                Raw Motion
-              </p>
-              <p className="text-sm text-basic text-muted leading-7">
-                A playful premium studio crafting motion narratives with warmth, polish, and bold clarity.
-              </p>
-            </div>
-
-            <div className="relative flex justify-center py-4">
-              <div className="absolute inset-x-0 top-1/2 h-px bg-brand-blue/10" />
-              <div className="relative inline-flex items-center justify-center rounded-full border border-brand-blue/10 bg-white/95 px-8 py-4 text-sm font-semibold uppercase tracking-[0.25em] text-brand-red shadow-[0_20px_60px_rgba(0,0,0,0.06)]">
-                say hello
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-start lg:items-end"
+          >
+            <a 
+              href="mailto:hello@rawmotion.studio"
+              className="group relative bg-brand-red text-white p-16 md:p-24 rounded-full flex flex-col items-center justify-center text-center hover:scale-105 transition-transform duration-500 shadow-2xl"
+            >
+              <span className="font-display text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none mb-2">
+                Work <br /> With Us
+              </span>
+              <ArrowUpRight className="w-8 h-8 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
+              {/* Decorative mini-label */}
+              <div className="absolute -top-4 -right-4 bg-white text-black text-[9px] font-black px-3 py-2 rounded-lg rotate-12 uppercase tracking-tighter">
+                Open for '26
               </div>
-            </div>
+            </a>
+          </motion.div>
+        </div>
 
-            <div className="space-y-4">
-              <p className="text-[10px] uppercase tracking-[0.35em] text-muted/70">
-                contact
-              </p>
-              <a href="mailto:hello@rawmotion.studio" className="block text-lg font-black uppercase tracking-[0.2em] text-text">
-                hello@rawmotion.studio
-              </a>
-              <p className="text-sm text-basic text-muted leading-7">
-                Lagos, Nigeria • Available for selective partnerships
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <span className="inline-flex items-center gap-2 text-sm text-muted text-basic">
-                  <span className="inline-block h-2 w-2 rounded-full bg-brand-red" />
-                  Motion • Brand • Film
-                </span>
-                <span className="inline-flex items-center gap-2 text-sm text-muted text-basic">
-                  <span className="inline-block h-2 w-2 rounded-full bg-brand-blue" />
-                  Crafted with care
-                </span>
-              </div>
+        {/* 3. PLAYFUL ICON LINKS */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-white/10 pt-16 mb-24">
+          <div className="space-y-6">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30">Connect</h4>
+            <div className="flex flex-wrap gap-4">
+              <SocialPill icon={<Camera size={18} />} label="Insta" href="#" />
+              <SocialPill icon={<Bird size={18} />} label="X-App" href="#" />
+              <SocialPill icon={<Mail size={18} />} label="Email" href="#" />
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-basic text-muted">
-            <p>© 2026 Raw Motion Studio</p>
-            <div className="flex items-center gap-4">
-              <span className="inline-flex h-2 w-2 rounded-full bg-brand-red" />
-              <span>Premium motion without the noise</span>
+          <div className="space-y-6">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30">Studio</h4>
+            <div className="font-mono text-sm text-white/50 leading-relaxed uppercase tracking-tight">
+              Lagos, Nigeria <br />
+              Remote First <br />
+              Everywhere.
             </div>
+          </div>
+
+          <div className="space-y-6 md:text-right">
+             <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30">Archives</h4>
+             <div className="flex flex-col md:items-end gap-2">
+                <FooterLink label="Our Process" />
+                <FooterLink label="Case Studies" />
+                <FooterLink label="Playground" />
+             </div>
+          </div>
+        </div>
+
+        {/* 4. FOOTER BASE */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-t border-white/5 pt-12">
+          <div className="flex items-center gap-4">
+            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+              <div className="w-3 h-3 bg-brand-red rounded-full animate-pulse" />
+            </div>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em]">Raw Motion Studio</p>
+          </div>
+          
+          <div className="flex items-center gap-8">
+            <p className="text-[10px] text-white/20 uppercase tracking-[0.1em]">© {currentYear} Raw Motion</p>
+            <button 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="group flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-brand-red hover:text-white transition-colors"
+            >
+              Top <ArrowUpRight size={14} className="-rotate-45 group-hover:-translate-y-1 transition-transform" />
+            </button>
           </div>
         </div>
       </div>
     </footer>
+  )
+}
+
+function SocialPill({ icon, label, href }: { icon: React.ReactNode, label: string, href: string }) {
+  return (
+    <a 
+      href={href}
+      className="flex items-center gap-3 bg-white/5 hover:bg-white text-white hover:text-black px-5 py-3 rounded-full border border-white/10 transition-all duration-300"
+    >
+      {icon}
+      <span className="text-[10px] font-black uppercase tracking-widest">{label}</span>
+    </a>
+  )
+}
+
+function FooterLink({ label }: { label: string }) {
+  return (
+    <a href="#" className="group flex items-center gap-2 text-xl font-black uppercase tracking-tighter text-white/40 hover:text-brand-red transition-all duration-300">
+      <span className="group-hover:mr-2 transition-all">{label}</span>
+      <div className="h-px w-0 group-hover:w-8 bg-brand-red transition-all" />
+    </a>
   )
 }

@@ -2,7 +2,7 @@
 import Navbar from './components/Navbar'
 import Cursor from './components/Cursor'
 import BgVideoSection from './components/BgVideoSection' // Your 30% Video
-import HeroSection from './components/HeroSection'       // Your 70% Text
+// import HeroSection from './components/HeroSection'       // Your 70% Text
 import WorkGrid from './components/WorkGrid'
 import Services from './components/Services'
 import Testimonials from './components/Testimonials'
@@ -20,7 +20,7 @@ export default function HomePage() {
       {/* The video section is fixed in place while the hero content begins below it. */}
       <BgVideoSection />
       <div className="relative z-10 pt-[70vh]">
-        <HeroSection />
+        {/* <HeroSection /> */}
       </div>
 
       {/* 03. THE SCROLLABLE STACK */}

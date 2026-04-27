@@ -9,8 +9,9 @@
   --color-muted: #7b6b55;            /* Warm neutral for secondary text */
   --color-brand-blue: #b08a5f;       /* Warm bronze accent */
   --color-soft-blue: #9f8d77;        /* Soft warm text */
-  --color-brand-red: #d9583b;        /* Playful terracotta accent */
+  --color-brand-red: #DA5436;        /* Playful terracotta accent */
   --color-titanium: #19140f;         /* Primary typography */
+  --color-brand-blue: #3668D9;       /* Cool, vibrant blue accent */
   
   --font-display: "Inter var", "Inter", "Helvetica Neue", "Segoe UI", sans-serif;
   --font-base: "Roboto", "Helvetica Neue", Arial, sans-serif;
@@ -51,6 +52,7 @@ body {
 .text-muted {
   color: var(--color-muted);
   font-family: var(--font-base);
+  /* font-weight: bold; */
 }
 .text-support {
   font-family: var(--font-base);
@@ -106,8 +108,8 @@ body {
 }
 
 .text-support {
-  font-size: 0.75rem;
-  letter-spacing: 0.24em;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
   line-height: 1.6;
   text-transform: uppercase;
 }

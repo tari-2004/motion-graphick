@@ -1,78 +1,90 @@
-// src/components/Services.tsx
 'use client'
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 
 const SERVICES = [
   { id: '01', title: 'Creative Direction', desc: 'Concept to execution for film, motion, and brand storytelling.' },
-  { id: '02', title: '2D / 3D Animation', desc: 'Premium motion design crafted for product launches and campaigns.', video: '/videos/second.mp4' },
-  { id: '03', title: 'Visual Effects', desc: 'Cinematic post-production with detail-driven compositing and finish.' },
-  { id: '04', title: 'Brand Identity', desc: 'Motion-first systems that elevate digital experiences and narratives.', video: '/videos/third.mp4' }
+  { id: '02', title: '2D / 3D Animation', desc: 'Premium motion design for products and campaigns.' },
+  { id: '03', title: 'Visual Effects', desc: 'Cinematic post-production and detail-driven compositing.' },
+  { id: '04', title: 'Brand Identity', desc: 'Motion-first systems that elevate digital narratives.' }
 ]
 
 export default function Services() {
+  const [active, setActive] = useState<string | null>(null)
+
   return (
-    <section id="services" className="relative bg-surface border-t border-brand-blue/10 px-6 md:px-12 py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(217,88,59,0.1),transparent_38%)] pointer-events-none" />
-      <div className="max-w-[1400px] mx-auto relative z-10">
-        <div className="mb-14 max-w-3xl">
-          <p className="text-[10px] font-black uppercase tracking-[0.45em] text-brand-red mb-4">
-            // OUR SERVICES
-          </p>
-          <h2 className="text-5xl md:text-6xl font-black text-text uppercase tracking-tight leading-[0.95] mb-5">
-            Clean, premium service offerings for modern visual brands.
+    <section className="relative bg-[#080808] py-12 px-6 overflow-hidden">
+      {/* Optimized Background: Single opacity layer */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_0%,#D9583B_0%,transparent_50%)] opacity-10 pointer-events-none" />
+
+      <div className="max-w-[1100px] mx-auto relative z-10">
+        <div className="flex justify-between items-end mb-10 border-b border-white/5 pb-6">
+          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">
+            CORE <span className="text-brand-red italic">SERVICES</span>
           </h2>
-          <p className="text-muted text-sm md:text-base leading-8 tracking-[0.18em] max-w-2xl">
-            We combine cinematic motion, refined storytelling, and motion-first identity systems to create elegant experiences that feel high-end and effortless.
-          </p>
+          <span className="font-mono text-[10px] text-white/20 uppercase tracking-[0.3em] hidden sm:block">
+            Ver. 2.0 // High_Speed
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {SERVICES.map((service, index) => {
-            const isAccent = service.id === '02'
+        <div className="flex flex-col">
+          {SERVICES.map((service) => {
+            const isOpen = active === service.id
             return (
-              <motion.article
-                key={service.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: index * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -8 }}
-                className={`group relative rounded-[2rem] border overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.12)] backdrop-blur-xl transition-transform duration-500 ${isAccent ? 'border-brand-red/20 bg-brand-red/10 shadow-[0_40px_100px_rgba(217,88,59,0.16)]' : 'border-white/10 bg-white/95'}`}
+              <div 
+                key={service.id} 
+                className="border-b border-white/5 overflow-hidden"
               >
-                {/* Background Video for specific cards */}
-                {service.video && (
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500"
-                  >
-                    <source src={service.video} type="video/mp4" />
-                  </video>
-                )}
-
-                {/* Overlay for text readability */}
-                <div className={`relative z-10 p-8 ${service.video ? (isAccent ? 'bg-gradient-to-br from-brand-red/10 via-white/90 to-white/95' : 'bg-gradient-to-br from-white/90 via-surface-soft to-white/95') : 'bg-white/95'}`}>
-                  <div className="flex items-center justify-between gap-4 mb-6">
-                    <span className={`text-[10px] font-semibold uppercase tracking-[0.35em] ${isAccent ? 'text-brand-red' : 'text-brand-blue'}`}>
+                <button 
+                  onClick={() => setActive(isOpen ? null : service.id)}
+                  className="w-full flex items-center justify-between py-5 group text-left transition-colors hover:bg-white/[0.01]"
+                >
+                  <div className="flex items-center gap-6 md:gap-10">
+                    <span className={`font-mono text-xs transition-colors duration-200 ${isOpen ? 'text-brand-red' : 'text-white/20'}`}>
                       {service.id}
                     </span>
-                    <div className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-[10px] uppercase tracking-[0.35em] ${isAccent ? 'border-brand-red/20 bg-white/90 text-brand-red' : 'border-brand-blue/10 bg-surface-soft text-muted'}`}>
-                      <span className="h-2 w-2 rounded-full bg-brand-red animate-pulse" />
-                      premium
-                    </div>
+                    <h3 className={`text-xl md:text-3xl font-black uppercase tracking-tight transition-all duration-200 ${isOpen ? 'text-white' : 'text-white/40 group-hover:text-white/70'}`}>
+                      {service.title}
+                    </h3>
                   </div>
-                  <h3 className={`text-3xl md:text-4xl font-black uppercase tracking-tight leading-[0.95] mb-4 ${isAccent ? 'text-brand-red' : 'text-text'}`}>
-                    {service.title}
-                  </h3>
-                  <p className={`text-sm leading-7 tracking-[0.18em] ${isAccent ? 'text-text text-basic' : 'text-muted text-basic'}`}>
-                    {service.desc}
-                  </p>
-                </div>
-              </motion.article>
+
+                  <div className={`transition-transform duration-300 ease-[0.23,1,0.32,1] ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={isOpen ? "#D9583B" : "currentColor"} strokeWidth="2.5" className={isOpen ? "" : "text-white/20"}>
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </div>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div 
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }} // "Snappy" easing
+                    >
+                      <div className="pb-6 pl-10 md:pl-20">
+                        <p className="text-white/50 text-sm md:text-base leading-snug max-w-lg">
+                          {service.desc}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             )
           })}
+        </div>
+
+        {/* Compact, high-speed button */}
+        <div className="mt-10 flex justify-end">
+          <Link href="/contact" className="group flex items-center gap-3 bg-white text-black px-6 py-3 rounded-full hover:bg-brand-red hover:text-white transition-all duration-200">
+            <span className="text-[11px] font-black uppercase tracking-widest">Inquiry</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4">
+              <path d="M7 17L17 7M17 7H7M17 7V17" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>
