@@ -9,7 +9,7 @@ const TESTIMONIALS = [
 ]
 
 export default function Testimonials() {
-  // Use 4 sets of the data to ensure the screen is always full, preventing "jump" glitches
+  // Increased density ensures the loop is physically longer, which helps smoothness
   const repeatedData = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS]
 
   return (
@@ -23,32 +23,28 @@ export default function Testimonials() {
         </h2>
       </div>
 
-      <div className="flex items-center">
+      {/* OPTIMIZATION: We use a static container that stays off the main thread.
+         'will-change-transform' ensures the GPU pre-allocates memory for the animation.
+      */}
+      <div className="flex items-center overflow-hidden">
         <motion.div 
           className="flex gap-6 will-change-transform"
-          animate={{ x: [0, -1000] }} 
+          animate={{ x: ["0%", "-50%"] }} 
           transition={{
-            duration: 20,
+            duration: 40, // Increased for a slower, more "weighted" feel
             repeat: Infinity,
             ease: "linear",
-            // This is critical for preventing "jank" on high-refresh monitors
             repeatType: "loop"
           }}
           style={{ 
             display: 'flex',
-            // Force hardware acceleration
-            transformStyle: 'preserve-3d' 
+            backfaceVisibility: 'hidden'
           }}
         >
           {repeatedData.map((item, idx) => (
             <div 
               key={idx}
-              className="w-[320px] flex-shrink-0 p-8 rounded-3xl bg-white border border-black/5 shadow-sm"
-              style={{
-                // Prevent the browser from re-calculating the layout of the card content while moving
-                backfaceVisibility: 'hidden',
-                WebkitBackfaceVisibility: 'hidden'
-              }}
+              className="w-[320px] flex-shrink-0 p-8 rounded-3xl bg-white border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.03)]"
             >
               <div className="min-h-[100px]">
                 <span className="text-[8px] font-mono text-black/20 block mb-4 tracking-widest">
@@ -68,9 +64,8 @@ export default function Testimonials() {
         </motion.div>
       </div>
 
-      {/* Side Masks: Essential for the "fade" effect */}
-      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#fafafa] to-transparent z-10" />
-      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#fafafa] to-transparent z-10" />
+      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#fafafa] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#fafafa] to-transparent z-10 pointer-events-none" />
     </section>
   )
 }

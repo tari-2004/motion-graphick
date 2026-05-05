@@ -1,39 +1,47 @@
 'use client'
+import dynamic from 'next/dynamic'
 import Navbar from './components/Navbar'
-import Cursor from './components/Cursor'
-import BgVideoSection from './components/BgVideoSection' // Your 30% Video
-// import HeroSection from './components/HeroSection'       // Your 70% Text
-import WorkGrid from './components/WorkGrid'
-import Services from './components/Services'
-import Testimonials from './components/Testimonials'
-import Footer from './components/Footer'
-import { motion, AnimatePresence } from 'framer-motion'
+import BgVideoSection from './components/BgVideoSection'
+import Loader from './components/Loader' // Ensure this path matches your file structure
+import { motion } from 'framer-motion'
+
+// Lazy load heavy components
+const WorkGrid = dynamic(() => import('./components/WorkGrid'), { ssr: false })
+const Services = dynamic(() => import('./components/Services'), { ssr: false })
+const Testimonials = dynamic(() => import('./components/Testimonials'), { ssr: false })
+const Footer = dynamic(() => import('./components/Footer'), { ssr: false })
 
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen bg-surface select-none overflow-x-hidden">
-      {/* 01. GLOBAL INTERFACE ELEMENTS */}
-      <Cursor />
-      <Navbar />
+    <Loader>
+      <main className="relative w-full min-h-screen bg-surface select-none overflow-x-hidden">
+        <Navbar />
 
-      {/* 02. THE HERO COMPOSITE (100vh) */}
-      {/* The video section is fixed in place while the hero content begins below it. */}
-      <BgVideoSection />
-      <div className="relative z-10 pt-[70vh]">
-        {/* <HeroSection /> */}
-      </div>
+        {/* Hero Section */}
+        <BgVideoSection />
+        
+        {/* Scrollable Content */}
+        <div className="relative z-10 contain-layout">
+          <div id="work">
+            <WorkGrid />
+          </div>
+          <div id="services">
+            <Services />
+          </div>
+          <div id="about">
+            <Testimonials />
+          </div>
+          <div id="contact">
+            <Footer />
+          </div>
+        </div>
 
-      {/* 03. THE SCROLLABLE STACK */}
-      {/* These components are modular and appear as the user scrolls */}
-      <div className="relative z-10">
-        <WorkGrid />
-        <Services />
-        <Testimonials />
-        <Footer />
-      </div>
-
-      {/* Background Polish */}
-      <div className="fixed inset-0 bg-noise opacity-[0.03] pointer-events-none z-50" />
-    </main>
+        {/* Optimized Background Polish */}
+        <div 
+          className="fixed inset-0 bg-noise opacity-[0.03] pointer-events-none z-50 will-change-transform" 
+          style={{ contain: 'strict' }}
+        />
+      </main>
+    </Loader>
   )
 }

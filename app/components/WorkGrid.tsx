@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 import ProjectCard from './ProjectCard'
 
 const PROJECTS = [
-  { id: '01', title: 'Nike / Air Max', video: '/videos/first.mp4', cat: '3D Motion' },
-  { id: '02', title: 'Amnesty Int.', video: '/videos/second.mp4', cat: '2D / Cel' },
-  { id: '03', title: 'Meta / Rebrand', video: '/videos/hero.mp4', cat: 'Product' },
-  { id: '04', title: 'Sound Design', video: '/videos/third.mp4', cat: 'Experimental' },
-  { id: '05', title: 'Sound Design', video: '/videos/second.mp4', cat: 'Presence' },
-  { id: '06', title: 'Sound Design', video: '/videos/hero.mp4', cat: 'Emotional' },
+  { id: '01', title: 'Experimental Art', video: 'https://agadon.b-cdn.net/T_Appkit%20R7.mp4', cat: '3D Motion' },
+  { id: '02', title: 'Product Narrative', video: 'https://agadon.b-cdn.net/Godark%20Rv4%20Cc%20Q22.mp4', cat: '2D / Cel' },
+  { id: '03', title: 'Visual Identity', video: 'https://agadon.b-cdn.net/Skai%20Cc%20R3%20Q23.5.mp4', cat: 'Product' },
+  { id: '04', title: 'Brand Expression', video: 'https://agadon.b-cdn.net/Agadon%20E-motion.mp4', cat: 'Experimental' },
+  { id: '05', title: 'User Interface', video: 'https://agadon.b-cdn.net/Cloud_Vizor%20R2.mp4', cat: 'Product' },
+  { id: '06', title: 'Sound Design', video: 'https://agadon.b-cdn.net/Agadon%20All%20media.mp4', cat: 'Design' },
 ]
 
 export default function WorkGrid() {
@@ -20,13 +20,16 @@ export default function WorkGrid() {
           <p className="font-base text-brand-red text-[10px] font-black uppercase tracking-[0.4em] mb-4">
             // SELECTED_REEL
           </p>
-          <h2 className="font-display text-7xl md:text-[9rem] font-black text-text uppercase tracking-[-0.07em] leading-[0.8]">
-            PROJECT <span className="text-brand-red italic">WORKS</span>
+          <h2 className="font-display text-7xl md:text-[9rem] font-black text-text tracking-[-0.07em] leading-[0.8]">
+            Project <span className="text-brand-red italic">Works</span>
           </h2>
         </div>
 
-        {/* Reduced Gap (gap-4) for tighter video proximity */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Optimized Grid: 
+           Added 'will-change-transform' to the container to help 
+           the GPU manage the entire grid as a single layer.
+        */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 will-change-transform">
           {PROJECTS.map((project, idx) => (
             <ProjectCard key={project.id} project={project} index={idx} />
           ))}
@@ -36,9 +39,9 @@ export default function WorkGrid() {
         <div className="mt-20 flex justify-center">
           <Link href="/work">
             <motion.div
-              whileHover={{ scale: 1.05, backgroundColor: '#1D4ED8' }} // Brand Blue hover
-              whileTap={{ scale: 0.95 }}
-              className="group flex items-center gap-6 bg-text text-surface px-14 py-7 rounded-full transition-all duration-300 shadow-2xl"
+              whileHover={{ scale: 1.02, backgroundColor: '#1D4ED8' }}
+              whileTap={{ scale: 0.98 }}
+              className="group flex items-center gap-6 bg-text text-surface px-14 py-7 rounded-full transition-all duration-500 ease-[0.22,1,0.36,1] shadow-2xl"
             >
               <span className="font-display text-xl md:text-2xl font-black uppercase tracking-tight">
                 See All Projects

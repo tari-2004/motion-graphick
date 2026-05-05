@@ -1,20 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* Cream, editorial studio palette */
-  --color-ink: #0d0106;              /* Dark accent for overlaid video and text */
-  --color-surface: #f7f2e8;          /* Main cream canvas */
-  --color-surface-soft: #fff8ef;     /* Secondary paper surface */
-  --color-text: #19140f;             /* Deep charcoal for copy */
-  --color-muted: #7b6b55;            /* Warm neutral for secondary text */
-  --color-brand-blue: #b08a5f;       /* Warm bronze accent */
-  --color-soft-blue: #9f8d77;        /* Soft warm text */
-  --color-brand-red: #DA5436;        /* Playful terracotta accent */
-  --color-titanium: #19140f;         /* Primary typography */
-  --color-brand-blue: #3668D9;       /* Cool, vibrant blue accent */
+  --color-ink: #0d0106;
+  --color-surface: #f7f2e8;
+  --color-surface-soft: #fff8ef;
+  --color-text: #19140f;
+  --color-muted: #7b6b55;
+  --color-brand-red: #DA5436;
+  --color-brand-blue: #3668D9;
   
-  --font-display: "Inter var", "Inter", "Helvetica Neue", "Segoe UI", sans-serif;
-  --font-base: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Inter var", "Inter", sans-serif;
+  --font-base: "Roboto", sans-serif;
 }
 
 :root {
@@ -23,110 +19,42 @@
   --accent: var(--color-brand-red);
 }
 
-/* Global resets for a polished studio landing */
 body {
   background-color: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-display);
   overflow-x: hidden;
+  /* Use 'subpixel-antialiased' if text looks thin on cream backgrounds */
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Selection: Uses the terracotta accent */
-::selection {
-  background: var(--color-brand-red);
-  color: white;
-}
-
-/* Cream studio helpers */
-.bg-surface {
-  background-color: var(--color-surface);
-}
-.bg-surface-soft {
-  background-color: var(--color-surface-soft);
-}
-.text-text {
-  color: var(--color-text);
-}
-.text-muted {
-  color: var(--color-muted);
-  font-family: var(--font-base);
-  /* font-weight: bold; */
-}
-.text-support {
-  font-family: var(--font-base);
-}
-.text-basic {
-  font-family: var(--font-base);
-}
-
-/* --- THE RAVIE TEXTURE SUITE --- */
-
-/* 1. Soft Paper Grain */
-.bg-scanlines {
-  background: linear-gradient(
-    to bottom,
-    transparent 60%,
-    rgba(0, 0, 0, 0.06) 61%
-  );
-  background-size: 100% 6px;
-}
-
-/* 2. Warm Film Grain / Noise */
+/* --- PERFORMANCE-FIRST TEXTURES --- */
 .bg-noise {
   background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-  filter: contrast(115%) brightness(115%);
-  opacity: 0.5;
-  will-change: auto;
+  /* Use fixed instead of auto to tell the browser not to recalculate unless necessary */
+  will-change: transform; 
+  pointer-events: none;
 }
 
-/* 3. The Blueprint Grid Overlay */
-/* Creates thin, warm bronze lines every 80px */
 .blueprint-grid {
+  /* Using 'contain: strict' can help browser painting performance */
+  contain: strict; 
   background-image: 
     linear-gradient(to right, rgba(176, 138, 95, 0.12) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(176, 138, 95, 0.12) 1px, transparent 1px);
   background-size: 80px 80px;
 }
 
-/* --- TYPOGRAPHY UTILITIES --- */
-
-.h-mega {
-  font-size: clamp(5rem, 10vw, 9rem);
-  font-weight: 900;
-  line-height: 0.88;
-  letter-spacing: -0.08em;
-  text-transform: uppercase;
-}
-
-.text-display {
-  font-size: clamp(3.25rem, 6vw, 6rem);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.06em;
-}
-
-.text-support {
-  font-size: 0.65rem;
-  letter-spacing: 0.16em;
-  line-height: 1.6;
-  text-transform: uppercase;
-}
-
-/* --- CURSOR MANAGEMENT --- */
-
-/* Hide native cursor on desktop to allow Custom Cursor to shine */
-@media (pointer: fine) {
-  body, a, button {
-    cursor: none !important;
+/* --- FASTER FEEL UTILITIES --- */
+/* Disabling hover effects on touch devices improves perceived tap speed */
+@media (hover: hover) {
+  button:active, a:active {
+    transition: transform 0.1s ease-out;
   }
 }
 
-/* Ensure mobile remains usable without custom cursor logic */
-@media (pointer: coarse) {
-  a, button, [role="button"] {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
+/* Force smooth hardware acceleration on animated elements */
+.animate-smooth {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }

@@ -1,53 +1,51 @@
 'use client'
-import { useRef, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-export default function ProjectCard({ project, index }: { project: any; index: number }) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = true
-      videoRef.current.play().catch(() => {})
-    }
-  }, [])
+export default function ProjectCard({ project, index }: { project: any, index: number }) {
+  const [isLoaded, setIsLoaded] = useState(false)
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
+    <motion.a
+      href={project.video}
+      target="_blank"
+      rel="noopener noreferrer"
+      // Added a softer spring transition for the card entrance
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.05, duration: 0.6 }}
-      /* Tighter card styling */
-      className="group flex flex-col bg-white rounded-[1.8rem] border border-brand-blue/5 overflow-hidden transition-all duration-500"
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ 
+        duration: 0.8, 
+        ease: [0.22, 1, 0.36, 1], // The "soft" easing curve
+        delay: index * 0.05 
+      }}
+      className="block relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#080808] cursor-pointer group will-change-transform"
     >
-      {/* CARD HEADER: Reduced padding (p-6) */}
-      <div className="p-4 pb-3 flex justify-between items-end bg-white">
-        <div className="space-y-1">
-          <p className="font-base text-[9px] text-brand-red font-black uppercase tracking-[0.3em] opacity-80">
-            {project.id} // {project.cat}
-          </p>
-          <h3 className="font-display text-[20px] md:text-[25px] font-black text-text uppercase tracking-[-0.04em] leading-none">
-            {project.title}
-          </h3>
-        </div>
-        
-        <span className="font-base text-[9px] font-bold text-muted uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-          Case_0{project.id}
+      {/* Video element - Added hardware acceleration */}
+      <video
+        src={project.video}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        onLoadedData={() => setIsLoaded(true)}
+        className={`w-full h-full object-cover transition-opacity duration-[1000ms] ease-in-out will-change-transform ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ backfaceVisibility: 'hidden' }}
+      />
+      
+      {/* Overlay - Smoothed transition */}
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500 ease-out flex items-center justify-center">
+        <span className="opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 text-white text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500">
+          Open_Video
         </span>
       </div>
-
-      {/* VIDEO CONTAINER: Tighter margins (mx-2 mb-2) */}
-      <div className="mx-2 mb-2 overflow-hidden rounded-[1.2rem] aspect-[16/10] bg-black">
-        <video
-          ref={videoRef}
-          src={project.video}
-          loop
-          muted
-          playsInline
-          className="h-full w-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
-        />
+      
+      {/* UI Details */}
+      <div className="absolute bottom-6 left-6 z-10 pointer-events-none">
+        <h3 className="text-white text-xl font-bold uppercase">{project.title}</h3>
+        <p className="text-brand-red text-[10px] font-black uppercase tracking-[0.2em]">{project.cat}</p>
       </div>
-    </motion.div>
+    </motion.a>
   )
 }

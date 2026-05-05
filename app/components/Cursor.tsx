@@ -47,3 +47,14 @@ export default function Cursor() {
     </motion.div>
   )
 }
+
+
+
+const ALL_PROJECTS = [
+  { id: '01', title: 'Nike / Air Max', video: 'https://agadon.b-cdn.net/T_Appkit%20R7.mp4', cat: '3D Motion' },
+  { id: '02', title: 'Amnesty Int.', video: 'https://agadon.b-cdn.net/Agadon%20All%20media.mp4', cat: '2D / Cel' },
+  { id: '03', title: 'Meta / Rebrand', video: 'https://agadon.b-cdn.net/Cloud_Vizor%20R2.mp4', cat: 'Product' },
+  { id: '04', title: 'Sound Design', video: 'https://agadon.b-cdn.net/Godark%20Rv4%20Cc%20Q22.mp4', cat: 'Experimental' },
+  { id: '05', title: 'Nvidia / GTC', video: 'https://agadon.b-cdn.net/6anAdi0Q2KSkkKIY4UB2zABbc.mp4', cat: 'VFX' },
+  { id: '06', title: 'Personal Reel', video: 'https://agadon.b-cdn.net/Skai%20Cc%20R3%20Q23.5.mp4', cat: 'Edit' },
+]
