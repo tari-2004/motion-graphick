@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 import ProjectCard from './ProjectCard'
 
 const PROJECTS = [
-  { id: '01', title: 'Experimental Art', video: 'https://agadon.b-cdn.net/T_Appkit%20R7.mp4', cat: '3D Motion' },
-  { id: '02', title: 'Product Narrative', video: 'https://agadon.b-cdn.net/Godark%20Rv4%20Cc%20Q22.mp4', cat: '2D / Cel' },
-  { id: '03', title: 'Visual Identity', video: 'https://agadon.b-cdn.net/Skai%20Cc%20R3%20Q23.5.mp4', cat: 'Product' },
-  { id: '04', title: 'Brand Expression', video: 'https://agadon.b-cdn.net/Agadon%20E-motion.mp4', cat: 'Experimental' },
-  { id: '05', title: 'User Interface', video: 'https://agadon.b-cdn.net/Cloud_Vizor%20R2.mp4', cat: 'Product' },
-  { id: '06', title: 'Sound Design', video: 'https://agadon.b-cdn.net/Agadon%20All%20media.mp4', cat: 'Design' },
+  { id: '01', title: 'Ton AppKit - Product Launch Video', video: 'https://agadon.b-cdn.net/T_Appkit%20R7.mp4', cat: '2d Story-Driven Animation' },
+  { id: '02', title: 'GoDark - Launch Video', video: 'https://agadon.b-cdn.net/Godark%20Rv4%20Cc%20Q22.mp4', cat: '3d Cinematic Motion Piece' },
+  { id: '03', title: 'Skai Trade - Product Teaser', video: 'https://agadon.b-cdn.net/Skai%20Cc%20R3%20Q23.5.mp4', cat: 'Contemporary SaaS Motion Graphics' },
+  { id: '04', title: 'E-Motion - Launch Video', video: 'https://agadon.b-cdn.net/Agadon%20E-motion.mp4', cat: '2D Animated Motion Graphics' },
+  { id: '05', title: 'Vizor DAO - Product Teaser', video: 'https://agadon.b-cdn.net/Cloud_Vizor%20R2.mp4', cat: 'Motion graphics Ad' },
+  { id: '06', title: 'All Midea DOOH - Billboard Looping Ad', video: 'https://agadon.b-cdn.net/Agadon%20All%20media.mp4', cat: 'Pseudo 3d (2.5) Motion Graphics Video' },
 ]
 
 export default function WorkGrid() {
@@ -25,21 +25,17 @@ export default function WorkGrid() {
           </h2>
         </div>
 
-        {/* Optimized Grid: 
-           Added 'will-change-transform' to the container to help 
-           the GPU manage the entire grid as a single layer.
-        */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 will-change-transform">
           {PROJECTS.map((project, idx) => (
+            // Mode defaults to 'navigate' automatically here
             <ProjectCard key={project.id} project={project} index={idx} />
           ))}
         </div>
 
-        {/* RESTORED: See All Button */}
         <div className="mt-20 flex justify-center">
           <Link href="/work">
             <motion.div
-              whileHover={{ scale: 1.02, backgroundColor: '#1D4ED8' }}
+              whileHover={{ scale: 1.02, backgroundColor: '#DA5436' }}
               whileTap={{ scale: 0.98 }}
               className="group flex items-center gap-6 bg-text text-surface px-14 py-7 rounded-full transition-all duration-500 ease-[0.22,1,0.36,1] shadow-2xl"
             >

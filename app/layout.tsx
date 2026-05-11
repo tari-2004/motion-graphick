@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RawMotion Studio",
+  title: "John's Studio",
   description: "Creative development studio.",
 };
 
